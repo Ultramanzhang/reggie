@@ -22,21 +22,21 @@ public class DishController {
     private DishService dishService;
 
 
-    @PostMapping
-    public R<String> save(@RequestBody Dish dish){
-        dishService.save(dish);
-        return R.success("新增菜品成功");
-    }
-
-
-
-    @PostMapping
-    public R<String> update(@RequestBody Dish dish){
-        log.info("修改分类信息");
-
-
-        return null;
-    }
+//    @PostMapping
+//    public R<String> save(@RequestBody Dish dish){
+//        dishService.save(dish);
+//        return R.success("新增菜品成功");
+//    }
+//
+//
+//
+//    @PostMapping
+//    public R<String> update(@RequestBody Dish dish){
+//        log.info("修改分类信息");
+//
+//
+//        return null;
+//    }
 
 
     /**
