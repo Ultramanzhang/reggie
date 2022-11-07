@@ -70,14 +70,12 @@ public class CategoryController {
 
     /**
      * 根据id修改分类信息
-     * @param category
+     * @param status
+     * @param ids
      * @return
      */
     @PostMapping("/status/{status}")
     public R<String> update(@PathVariable int status,String ids){
-
-
-
         return R.success("修改分类信息成功");
     }
 

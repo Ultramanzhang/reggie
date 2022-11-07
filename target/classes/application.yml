@@ -1,6 +1,8 @@
 server:
   port: 8080
 spring:
+  banner:
+    location: /banner.txt
   application:
     name: reggie_take_out
   datasource:
@@ -18,4 +20,4 @@ mybatis-plus:
     db-config:
       id-type: ASSIGN_ID
 reggie:
-  path: D\
+  path: D:\img\
