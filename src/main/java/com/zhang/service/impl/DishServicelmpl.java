@@ -86,4 +86,12 @@ public class DishServicelmpl extends ServiceImpl<DishMapper, Dish>implements Dis
         }).collect(Collectors.toList());
         dishFlavorService.saveBatch(flavors);
     }
+    public void deleteDish(String ids){
+        String[] list=ids.split(",");
+        for (String id : list) {
+            this.removeById(id);
+            LambdaQueryWrapper<DishFlavor>lambdaQueryWrapper=new LambdaQueryWrapper<>();
+            dishFlavorService.remove(lambdaQueryWrapper.eq(DishFlavor::getDishId,id));
+        }
+    }
 }

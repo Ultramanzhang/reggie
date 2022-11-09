@@ -18,6 +18,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,6 +42,7 @@ public class DishController {
 
     /**
      * 新增菜品
+     *
      * @param dishDto
      * @return
      */
@@ -48,25 +50,8 @@ public class DishController {
     public R<String> save(@RequestBody DishDto dishDto) {
         log.info(dishDto.toString());
         dishService.saveWithFlavor(dishDto);
-
         return R.success("新增菜品成功");
     }
-//    @PostMapping
-//    public R<String> save(@RequestBody Dish dish){
-//        dishService.save(dish);
-//        return R.success("新增菜品成功");
-//    }
-//
-//
-//
-//    @PostMapping
-//    public R<String> update(@RequestBody Dish dish){
-//        log.info("修改分类信息");
-//
-//
-//        return null;
-//    }
-
 
     /**
      * 分页查询
@@ -91,7 +76,7 @@ public class DishController {
         //执行查询
         dishService.page(pageInfo, queryWrapper);
         //对象拷贝
-        BeanUtils.copyProperties(pageInfo,dishDtoPage,"records");
+        BeanUtils.copyProperties(pageInfo, dishDtoPage, "records");
 
         List<Dish> records = pageInfo.getRecords();
         List<DishDto> list = records.stream().map((item) -> {
@@ -100,8 +85,10 @@ public class DishController {
             Long categoryId = item.getCategoryId();//分类id
             //根据id查询分类对象
             Category category = categoryService.getById(categoryId);
-            if (category!=null){String categoryName = category.getName();
-                dishDto.setCategoryName(categoryName);}
+            if (category != null) {
+                String categoryName = category.getName();
+                dishDto.setCategoryName(categoryName);
+            }
 
             return dishDto;
         }).collect(Collectors.toList());
@@ -112,11 +99,12 @@ public class DishController {
 
     /**
      * 根据id查询菜品信息和对应的口味信息
+     *
      * @param id
      * @return
      */
     @GetMapping("/{id}")
-     public R<DishDto> get(@PathVariable Long id){
+    public R<DishDto> get(@PathVariable Long id) {
         DishDto dishDto = dishService.getByIdWithFlavor(id);
         return R.success(dishDto);
     }
@@ -124,6 +112,7 @@ public class DishController {
 
     /**
      * 修改菜品菜品
+     *
      * @param dishDto
      * @return
      */
@@ -134,6 +123,24 @@ public class DishController {
         dishService.updteWithFlavor(dishDto);
 
         return R.success("新增菜品成功");
+    }
+
+    @PostMapping("/status/{status}")
+    public R<String> changeStatus(@PathVariable int status, String ids) {
+        String[] list = ids.split(",");
+        for (String id : list) {
+            Dish dish = new Dish();
+            dish.setId(Long.parseLong(id));
+            dish.setStatus(status);
+            dishService.updateById(dish);
+        }
+        return R.success("操作成功");
+    }
+
+    @DeleteMapping
+    public R<String>delete(String ids){
+        dishService.deleteDish(ids);
+        return R.success("删除成功");
     }
 
 }
