@@ -125,6 +125,12 @@ public class DishController {
         return R.success("新增菜品成功");
     }
 
+    /**
+     * 批量修改状态(起售、停售)
+     * @param status
+     * @param ids
+     * @return
+     */
     @PostMapping("/status/{status}")
     public R<String> changeStatus(@PathVariable int status, String ids) {
         String[] list = ids.split(",");
@@ -137,6 +143,11 @@ public class DishController {
         return R.success("操作成功");
     }
 
+    /**
+     * 批量删除
+     * @param ids
+     * @return
+     */
     @DeleteMapping
     public R<String>delete(String ids){
         dishService.deleteDish(ids);
