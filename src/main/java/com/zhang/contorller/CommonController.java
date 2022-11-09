@@ -3,6 +3,7 @@ package com.zhang.contorller;
 import com.zhang.common.R;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -49,11 +50,11 @@ public class CommonController {
             dir.mkdirs();
         }
         try {
-            file.transferTo(new File(basepath+originalFilename));
+            file.transferTo(new File(basepath+fileName));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+        return R.success(fileName);
     }
 
     /**
@@ -61,6 +62,7 @@ public class CommonController {
      * @param name
      * @param response
      */
+    @GetMapping("/download")
     public void download(String name, HttpServletResponse response){
 
         try {
@@ -68,6 +70,7 @@ public class CommonController {
             FileInputStream fileInputStream = new FileInputStream(new File(basepath+name));
             //输出流，通过输出流将文件写回浏览器，在浏览器展示图片
             ServletOutputStream servletOutputStream =response.getOutputStream();
+            response.setContentType("image/jpeg");
             int len =0;
             byte[] bytes = new byte[1024];
             while ((len = fileInputStream.read(bytes))!=-1){

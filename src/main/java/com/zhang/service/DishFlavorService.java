@@ -1,4 +1,7 @@
 package com.zhang.service;
 
-public interface DishFlavorService {
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.zhang.entity.DishFlavor;
+
+public interface DishFlavorService extends IService<DishFlavor> {
 }
