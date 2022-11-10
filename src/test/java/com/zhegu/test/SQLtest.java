@@ -1,7 +1,7 @@
 package com.zhegu.test;
 
-import com.zhang.reggie.entity.Dish;
-import com.zhang.reggie.service.DishService;
+import com.zhegu.reggie.entity.Dish;
+import com.zhegu.reggie.service.DishService;
 import org.junit.jupiter.api.Test;
 
 public class SQLtest {
