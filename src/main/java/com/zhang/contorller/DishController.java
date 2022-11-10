@@ -8,6 +8,7 @@ import com.zhang.dto.DishDto;
 import com.zhang.entity.Category;
 import com.zhang.entity.Dish;
 
+import com.zhang.entity.SetmealDish;
 import com.zhang.service.CategoryService;
 import com.zhang.service.DishFlavorService;
 import com.zhang.service.DishService;
@@ -153,5 +154,23 @@ public class DishController {
         dishService.deleteDish(ids);
         return R.success("删除成功");
     }
+    /**
+     * 根据条件查询对应的菜品数据
+     * @param dish
+     * @return
+     */
+    @GetMapping("/list")
+    public R<List<Dish>> list(Dish dish){
 
+        //构造查询条件
+        LambdaQueryWrapper<Dish> lambdaQueryWrapper=new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.eq(dish.getCategoryId()!=null,Dish::getCategoryId,dish.getCategoryId());
+        //添加排序条件
+        lambdaQueryWrapper.orderByAsc(Dish::getSort).orderByDesc(Dish::getUpdateTime);
+        //查询状态为1的（起售状态）菜品
+        lambdaQueryWrapper.eq(Dish::getStatus,1);
+        List<Dish> list =dishService.list(lambdaQueryWrapper);
+
+        return R.success(list);
+    }
 }
