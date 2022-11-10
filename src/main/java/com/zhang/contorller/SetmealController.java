@@ -111,6 +111,12 @@ public class SetmealController {
     }
 
 
+    @DeleteMapping
+    public R<String> delete(@RequestParam List<Long> ids){
+        log.info("{}",ids);
+        setmealService.removeWithDish(ids);
+        return R.success("删除成功");
+    }
 
 
 }
