@@ -11,6 +11,17 @@ spring:
       url: jdbc:mysql://localhost:3306/reggie?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
       username: root
       password: root
+  mail:
+    protocol: smtp  # 邮件协议
+    host: smtp.qq.com # qq邮箱smtp服务器地址
+    username: 2734866732@qq.com # 发件人邮箱地址
+    password: erdlpugmjslcdcef # 授权码
+    default-encoding: utf-8 # 编码字符集
+
+
+
+
+
 mybatis-plus:
   configuration:
     #在映射实体或者属性时，将数据库中表名和字段名中的下划线去掉，按照驼峰命名法映射
