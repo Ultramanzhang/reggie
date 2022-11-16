@@ -9,7 +9,7 @@ public class ValidateCodeUtils {
     /**
      * 随机生成验证码
      * @param length 长度为4位或者6位
-     * @return
+     * @return code
      */
     public static Integer generateValidateCode(int length){
         Integer code =null;
@@ -31,8 +31,8 @@ public class ValidateCodeUtils {
 
     /**
      * 随机生成指定长度字符串验证码
-     * @param length 长度
-     * @return
+     * @param length
+     * @return capstr
      */
     public static String generateValidateCode4String(int length){
         Random rdm = new Random();
