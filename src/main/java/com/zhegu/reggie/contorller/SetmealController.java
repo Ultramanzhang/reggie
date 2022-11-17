@@ -116,4 +116,17 @@ public class SetmealController {
     }
 
 
+
+    @GetMapping("/list")
+    public R<List<Setmeal>> list(@RequestBody Setmeal setmeal){
+        LambdaQueryWrapper<Setmeal> lambdaQueryWrapper=new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.eq(setmeal.getCategoryId()!=null,Setmeal::getCategoryId,setmeal.getCategoryId());
+        lambdaQueryWrapper.eq(setmeal.getStatus()!=null,Setmeal::getStatus,setmeal.getStatus());
+        lambdaQueryWrapper.orderByDesc(Setmeal::getUpdateTime);
+
+        List<Setmeal> list = setmealService.list(lambdaQueryWrapper);
+        return R.success(list);
+
+    }
+
 }

@@ -42,7 +42,7 @@ public class UserController {
 
         if (StringUtils.isNotEmpty(phone)) {
             String code = ValidateCodeUtils.generateValidateCode(6).toString();
-            String context = "欢迎使用瑞吉餐购，登录验证码为: " + code + ",五分钟内有效，请妥善保管!";
+            String context = "【瑞吉餐购】您的登录验证码为: " + code + ",五分钟内有效，请妥善保管!";
             log.info("code={}", code);
 
             // 真正地发送邮箱验证码
